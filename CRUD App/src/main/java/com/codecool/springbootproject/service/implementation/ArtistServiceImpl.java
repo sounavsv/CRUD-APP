@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class ArtistServiceImpl implements ArtistService {
 
-    ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     @Autowired
     public ArtistServiceImpl(ArtistRepository artistRepository) {
@@ -23,21 +23,25 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<Artist> findAllArtists() {
+        log.debug("Fetching all artists");
         return (List<Artist>) artistRepository.findAll();
     }
 
     @Override
     public Optional<Artist> getArtistById(int id) {
+        log.debug("Fetching artist by ID: {}", id);
         return artistRepository.findById(id);
     }
 
     @Override
     public void deleteArtistById(int id) {
+        log.debug("Deleting artist by ID: {}", id);
         artistRepository.deleteById(id);
     }
 
     @Override
     public long getArtistCount() {
+        log.debug("Fetching total count of artists");
         return artistRepository.count();
     }
 }
