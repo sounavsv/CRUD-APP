@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class GenreServiceImpl implements GenreService {
 
-    GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
     @Autowired
     public GenreServiceImpl(GenreRepository genreRepository) {
@@ -23,26 +23,31 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public List<Genre> findAllGenres() {
+        log.debug("Fetching all genres");
         return (List<Genre>) genreRepository.findAll();
     }
 
     @Override
     public Optional<Genre> getGenreById(int id) {
+        log.debug("Fetching genre by ID: {}", id);
         return genreRepository.findById(id);
     }
 
     @Override
     public void deleteGenreById(int id) {
+        log.debug("Deleting genre by ID: {}", id);
         genreRepository.deleteById(id);
     }
 
     @Override
     public void addNewGenre(Genre genre) {
+        log.debug("Adding a new genre: {}", genre);
         genreRepository.save(genre);
     }
 
     @Override
     public long getGenreCount() {
+        log.debug("Fetching total count of genres");
         return genreRepository.count();
     }
 }
